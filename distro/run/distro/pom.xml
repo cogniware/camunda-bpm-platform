@@ -44,6 +44,21 @@
       </exclusions>
     </dependency>
 
+    <!-- make sure this runs after spring-security -->
+    <dependency>
+      <groupId>org.camunda.bpm.run</groupId>
+      <artifactId>camunda-bpm-run-modules-spring-security</artifactId>
+      <version>${project.version}</version>
+      <type>pom</type>
+      <exclusions>
+        <!-- we don't need any transitive dependencies -->
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
   </dependencies>
 
   <build>

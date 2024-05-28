@@ -5,17 +5,19 @@ BASEDIR=$(dirname "$0")
 PARENTDIR=$(builtin cd "$BASEDIR/.."; pwd)
 DEPLOYMENT_DIR=$PARENTDIR/configuration/resources
 WEBAPPS_PATH=$BASEDIR/webapps/
+SPRING_SECURITY_PATH=$BASEDIR/spring-security/
 REST_PATH=$BASEDIR/rest/
 SWAGGER_PATH=$BASEDIR/swaggerui
 EXAMPLE_PATH=$BASEDIR/example
 PID_PATH=$BASEDIR/run.pid
 OPTIONS_HELP="Options:
-  --webapps    - Enables the Camunda Platform Webapps
-  --rest       - Enables the REST API
-  --swaggerui  - Enables the Swagger UI
-  --example    - Enables the example application
-  --production - Applies the production.yaml configuration file
-  --detached   - Starts Camunda Run as a detached process
+  --webapps         - Enables the Camunda Platform Webapps
+  --spring-security - Enables the Camunda Platform Spring Security
+  --rest            - Enables the REST API
+  --swaggerui       - Enables the Swagger UI
+  --example         - Enables the example application
+  --production      - Applies the production.yaml configuration file
+  --detached        - Starts Camunda Run as a detached process
 "
 
 # set environment parameters
@@ -60,6 +62,10 @@ if [ "$1" = "start" ] ; then
                      classPath=$WEBAPPS_PATH,$classPath
                      echo WebApps enabled
                      ;;
+      --spring-security ) optionalComponentChosen=true
+                          classPath=$SPRING_SECURITY_PATH,$classPath
+                          echo Spring Security enabled
+                          ;;
       --rest )       optionalComponentChosen=true
                      restChosen=true
                      classPath=$REST_PATH,$classPath
@@ -84,7 +90,10 @@ if [ "$1" = "start" ] ; then
       --help )       printf "%s" "$OPTIONS_HELP"
                      exit 0
                      ;;
-      * )            exit 1
+      * )            printf "Unexpected argument '%s'!" "$1"
+                     printf "%s" "$OPTIONS_HELP"
+                     exit 1
+                     ;;
     esac
     shift
   done

@@ -131,6 +131,11 @@
       <directory>../modules/swaggerui/target/dependency/</directory>
       <outputDirectory>internal/swaggerui/</outputDirectory>
     </fileSet>
+    <!-- TODO or should this be in distro? -->
+    <fileSet>
+      <directory>../modules/spring-security/target/dependency/</directory>
+      <outputDirectory>internal/spring-security/</outputDirectory>
+    </fileSet>
     <!-- create empty resource folder -->
     <fileSet>
       <directory>resources/dummyResource</directory>

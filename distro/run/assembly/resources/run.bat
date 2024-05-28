@@ -5,6 +5,7 @@ SET BASEDIR=%~dp0
 SET PARENTDIR=%BASEDIR%..\
 SET DEPLOYMENTDIR=%PARENTDIR%configuration/resources
 SET WEBAPPS_PATH=%BASEDIR%webapps
+SET SPRING_SECURITY_PATH=%BASEDIR%spring-security
 SET REST_PATH=%BASEDIR%rest
 SET SWAGGER_PATH=%BASEDIR%swaggerui
 SET EXAMPLE_PATH=%BASEDIR%example
@@ -79,6 +80,12 @@ IF [%~1]==[--webapps] (
   SET optionalComponentChosen=true
   SET classPath=%WEBAPPS_PATH%,%classPath%
   ECHO WebApps enabled
+)
+
+IF [%~1]==[--spring-security] (
+  SET optionalComponentChosen=true
+  SET classPath=%SPRING_SECURITY_PATH%,%classPath%
+  ECHO Spring Security enabled
 )
 
 IF [%~1]==[--rest] (
@@ -169,11 +176,12 @@ GOTO End
 ECHO Usage: run.bat [start^|stop] (options...)
 :ArgsHelp
 ECHO Options:
-ECHO   --webapps    - Enables the Camunda Platform Webapps
-ECHO   --rest       - Enables the REST API
-ECHO   --swaggerui  - Enables the Swagger UI
-ECHO   --example    - Enables the example application
-ECHO   --production - Applies the production.yaml configuration file
-ECHO   --detached   - Starts Camunda Run as a detached process
+ECHO   --webapps          - Enables the Camunda Platform Webapps
+ECHO   --spring-security  - Enables the Camunda Platform Spring Security
+ECHO   --rest             - Enables the REST API
+ECHO   --swaggerui        - Enables the Swagger UI
+ECHO   --example          - Enables the example application
+ECHO   --production       - Applies the production.yaml configuration file
+ECHO   --detached         - Starts Camunda Run as a detached process
 
 :End
