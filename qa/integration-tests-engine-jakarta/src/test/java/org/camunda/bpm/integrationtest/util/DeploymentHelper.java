@@ -48,10 +48,7 @@ public class DeploymentHelper extends AbstractDeploymentHelper {
     } else {
 
       JavaArchive[] archives = resolveDependenciesFromPomXml(engineCdiArtifactName,
-              "org.jboss.weld.servlet:weld-servlet-core",
-              "jakarta.enterprise.concurrent:jakarta.enterprise.concurrent-api",
-              "jakarta.transaction:jakarta.transaction-api",
-              "jakarta.inject:jakarta.inject-api"
+              "org.jboss.weld.servlet:weld-servlet-shaded"
       );
 
       if(archives.length == 0) {
@@ -78,7 +75,7 @@ public class DeploymentHelper extends AbstractDeploymentHelper {
               .workOffline()
               .loadPomFromFile("pom.xml")
               .resolve(engineCdiArtifactName, dependencyName)
-              .withTransitivity()
+              .withoutTransitivity()
               .as(JavaArchive.class);
   }
 
